@@ -1,0 +1,12 @@
+local H = require("./Harness")
+require("./Util.spec")
+require("./Document.spec")
+require("./Search.spec")
+require("./Model.spec")
+require("./Console.spec")
+require("./Execution.spec")
+require("./Config.spec")
+require("./UI.spec")
+require("./Capabilities.spec")
+print(`{H.count - H.failed}/{H.count} tests passed`)
+if H.failed > 0 then error(`{H.failed} tests failed`) end

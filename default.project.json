@@ -1,0 +1,13 @@
+{
+  "name": "SilverExecutor",
+  "tree": {
+    "$className": "DataModel",
+    "StarterPlayer": {
+      "StarterPlayerScripts": {
+        "Silver": {
+          "$path": "src"
+        }
+      }
+    }
+  }
+}

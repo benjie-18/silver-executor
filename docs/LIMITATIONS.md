@@ -1,0 +1,9 @@
+# Limitations and security boundaries
+
+- **No default client execution.** Roblox client permissions are not bypassed. Run in a standard LocalScript reports "loadstring unavailable in this host". A real trusted compiler must be supplied by the embedding host; the UI does not expose a compiler configuration field.
+- **No sandbox guarantee.** Code compiled by a host compiler can access any ambient capabilities that host grants. Do not pass unknown or untrusted source. There is no network-facing or server-side arbitrary-code RemoteEvent.
+- **Best-effort stop.** `task.cancel` affects the managed worker only. It cannot preempt non-yielding code reliably or undo created instances, connections, spawned tasks, network calls, or other side effects.
+- **No verified injector.** The supplied offset URL, CoreScript names, bytecode fields, and thread layout have not been validated. These are intentionally not implemented.
+- **Editor scope.** No syntax highlighting, structural validation, autocomplete, code folding, multi-file persistence, resizable panes, per-key undo coalescing, or runtime output capture. Native TextBox provides selection and platform input. Undo checkpoints per Text change can be expensive with large sources; `Document` stores snapshots capped at 128.
+- **Search.** UI Find selects the first match and logs a count; pattern and replace-all APIs are only available to module callers. Pattern matches are Lua patterns, not PCRE. Zero-width matches are rejected. Byte columns are not Unicode grapheme positions.
+- **Environment.** UI requires `Players.LocalPlayer`, `PlayerGui`, and Roblox GUI objects; an experience can block or cover the UI with its own layout or policies. Installation in one experience does not grant cross-experience access. Small screens can scroll the window, tabs, and toolbar. Pure modules are tested with the Luau CLI; no Studio integration tests or real client execution have been performed.

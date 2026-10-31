@@ -1,0 +1,13 @@
+local H = require("./Harness")
+local D = require("../src/UI/Editor/Document")
+H.test("replace across lines and undo redo", function()
+    local d = D.new("abc\ndef\n")
+    H.ok(d:replace(1, 1, 2, 2, "X\nY"))
+    H.eq(d:text(), "aX\nYf\n")
+    H.ok(d:undo()) H.eq(d:text(), "abc\ndef\n")
+    H.ok(d:redo()) H.eq(d:text(), "aX\nYf\n")
+end)
+H.test("invalid range leaves document untouched", function()
+    local d = D.new("hi") H.eq(d:replace(2, 0, 2, 1, "x"), false) H.eq(d:text(), "hi")
+end)
+return true
